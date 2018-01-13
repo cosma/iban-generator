@@ -4,7 +4,7 @@ import cosma.iban.generator.bban.BasicBankAccountNumber;
 
 public class DE extends BasicBankAccountNumber {
 
-    protected int getLength() {
+    public int getLength() {
         return 18;
     }
 

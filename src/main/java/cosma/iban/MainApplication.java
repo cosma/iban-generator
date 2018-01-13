@@ -1,5 +1,6 @@
 package cosma.iban;
 
+import cosma.iban.generator.IBAN;
 import cosma.iban.generator.bban.BasicBankAccountNumber;
 import cosma.iban.generator.bban.countries.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,11 +20,16 @@ public class MainApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        BasicBankAccountNumber NL = new NL();
+//        BasicBankAccountNumber NL = new NL();
+//
+//        String bban = NL.generate();
+//        String ISOCode = NL.getISOCode();
 
-        String bban = NL.generate();
-        String ISOCode = NL.getISOCode();
+        IBAN IBANGenerator = new IBAN("AT");
 
+        String code =  IBANGenerator.generate();
+
+        System.out.println(code);
 
         System.exit(0);
 

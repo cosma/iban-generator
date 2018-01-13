@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class NL extends BasicBankAccountNumber {
 
-    protected int getLength() {
+    public int getLength() {
         return 14;
     }
 

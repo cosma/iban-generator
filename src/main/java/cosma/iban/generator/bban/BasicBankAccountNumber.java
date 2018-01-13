@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
  */
 abstract public class BasicBankAccountNumber {
 
-    protected abstract int getLength();
+    private String code;
+
+    public abstract int getLength();
 
     protected abstract String generateBankIdentifier();
 
@@ -16,20 +18,22 @@ abstract public class BasicBankAccountNumber {
 
     protected abstract String generateAccountNumber();
 
-    public String generate() {
-        return generateBankIdentifier() + generateBranchIdentifier() + generateAccountNumber();
+    public void generate() {
+        code = generateBankIdentifier() + generateBranchIdentifier() + generateAccountNumber();
     }
 
     public String getISOCode() {
         return this.getClass().getSimpleName();
     }
 
+    public String getCode() {
+        return code;
+    }
+
     protected String generateRandomNumberWithFixedLength(int length) {
         String chars = "0123456789";
-        String randomNumber = new Random().ints(length, 0, chars.length())
+        return new Random().ints(length, 0, chars.length())
                 .mapToObj(i -> "" + chars.charAt(i))
                 .collect(Collectors.joining());
-
-        return randomNumber;
     }
 }
