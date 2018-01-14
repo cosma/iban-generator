@@ -1,4 +1,4 @@
-package cosma.iban.generator.bban;
+package cosma.iban.generator.BBAN;
 
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -22,14 +22,27 @@ abstract public class BasicBankAccountNumber {
         code = generateBankIdentifier() + generateBranchIdentifier() + generateAccountNumber();
     }
 
-    public String getISOCode() {
+    /**
+     *
+     * @return String
+     */
+    public String getCountryCode() {
         return this.getClass().getSimpleName();
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     *
+     * @param length int
+     * @return String
+     */
     protected String generateRandomNumberWithFixedLength(int length) {
         String chars = "0123456789";
         return new Random().ints(length, 0, chars.length())

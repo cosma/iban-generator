@@ -1,51 +1,93 @@
 package cosma.iban.generator;
 
-import cosma.iban.generator.bban.BasicBankAccountNumber;
+import cosma.iban.generator.BBAN.BasicBankAccountNumber;
 
 import java.math.BigInteger;
+import java.util.Map;
 
 public class IBAN {
 
-    private BasicBankAccountNumber bban;
+    private Map<String, Integer> storage;
 
-    public IBAN(String ISOCode) {
-        ISOCode = ISOCode.toUpperCase();
-        ClassLoader classLoader = BasicBankAccountNumber.class.getClassLoader();
+    private BasicBankAccountNumber BBAN = null;
 
-        try {
-            Class aClass = classLoader.loadClass("cosma.iban.generator.bban.countries." + ISOCode);
+    /**
+     * @param storage Map<String, Integer>
+     */
+    public IBAN(Map<String, Integer> storage) {
+        this.storage = storage;
+    }
 
+
+    /**
+     * recursive function until finds a unique value of IBANCode
+     * @param countryCode String
+     * @return String
+     */
+    public String generate(String countryCode) {
+
+        lazyLoadBBAN(countryCode);
+
+        BBAN.generate();
+
+        String CheckDigits = calculateCheckDigits();
+
+        String code = BBAN.getCountryCode() + CheckDigits + BBAN.getCode();
+
+        if (isInStorage(code)) {
+            return generate(countryCode);
+        }
+
+        addToStorage(code);
+
+        return code;
+    }
+
+    /**
+     * lazy load BBAN only is wasn't loaded or the countryCode changed
+     *
+     * @param countryCode String
+     */
+    private void lazyLoadBBAN(String countryCode) {
+        countryCode = countryCode.toUpperCase();
+
+        if (this.BBAN == null || !this.BBAN.getCountryCode().equals(countryCode)) {
             try {
-                bban = (BasicBankAccountNumber) aClass.newInstance();
+                ClassLoader classLoader = BasicBankAccountNumber.class.getClassLoader();
+                Class BBANClass = classLoader.loadClass("cosma.iban.generator.BBAN.countries." + countryCode);
+                this.BBAN = (BasicBankAccountNumber) BBANClass.getConstructors()[0].newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
     /**
      *
-     * @return String
+     * @param code String
+     * @return boolean
      */
-    public String generate() {
-        bban.generate();
-
-        String CheckDigits = calculateCheckDigits(bban);
-
-        return bban.getISOCode() + CheckDigits + bban.getCode();
+    private boolean isInStorage(String code) {
+        return this.storage.containsKey(code);
     }
+
+    /**
+     *
+     * @param code String
+     */
+    private void addToStorage(String code) {
+        this.storage.put(code, 1);
+    }
+
 
     /**
      * See https://en.wikipedia.org/wiki/International_Bank_Account_Number#Generating_IBAN_check_digits
      *
-     * @param bban
-     * @return
+     * @return String
      */
-    private String calculateCheckDigits(BasicBankAccountNumber bban ) {
+    private String calculateCheckDigits() {
 
-        String code = bban.getCode() + bban.getISOCode() + "00";
+        String code = this.BBAN.getCode() + this.BBAN.getCountryCode() + "00";
 
         String numericCode = convertAlphaToNumeric(code);
 
@@ -61,7 +103,11 @@ public class IBAN {
 
     }
 
-
+    /**
+     *
+     * @param toConvert String
+     * @return String
+     */
     private String convertAlphaToNumeric(String toConvert) {
 
         String converted = toConvert;
