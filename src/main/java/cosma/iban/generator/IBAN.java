@@ -55,7 +55,7 @@ public class IBAN {
             try {
                 ClassLoader classLoader = BasicBankAccountNumber.class.getClassLoader();
                 Class BBANClass = classLoader.loadClass("cosma.iban.generator.BBAN.countries." + countryCode);
-                this.BBAN = (BasicBankAccountNumber) BBANClass.getConstructors()[0].newInstance();
+                this.BBAN = (BasicBankAccountNumber) BBANClass.newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
