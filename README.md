@@ -1,8 +1,9 @@
 IBAN code Generator
-====================
+===================
 
-[IBAN](https://en.wikipedia.org/wiki/International_Bank_Account_Number)
+Spring Boot COnsole application to generate IBAN codes.
 
+Inspired by [IBAN](https://en.wikipedia.org/wiki/International_Bank_Account_Number)
 
 
 RUN
