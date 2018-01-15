@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -24,15 +25,21 @@ public class IBANGeneratorTests {
         IBANValidator validator = new IBANValidator();
 
         for (int i=0; i< 1000; i++){
-            assertTrue(validator.validate(generator.generate("de")));
+            String code = generator.generate("de");
+            assertEquals(22, code.length());
+            assertTrue(validator.validate(code));
         }
 
         for (int i=0; i< 1000; i++){
-            assertTrue(validator.validate(generator.generate("NL")));
+            String code = generator.generate("NL");
+            assertEquals(18, code.length());
+            assertTrue(validator.validate(code));
         }
 
         for (int i=0; i< 1000; i++){
-            assertTrue(validator.validate(generator.generate("At")));
+            String code = generator.generate("At");
+            assertEquals(20, code.length());
+            assertTrue(validator.validate(code));
         }
     }
 }
