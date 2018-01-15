@@ -1,7 +1,7 @@
 IBAN code Generator
 ===================
 
-Spring Boot COnsole application to generate IBAN codes.
+Spring Boot Console application to generate IBAN codes.
 
 Inspired by [IBAN](https://en.wikipedia.org/wiki/International_Bank_Account_Number)
 
