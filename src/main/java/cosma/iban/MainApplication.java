@@ -1,10 +1,9 @@
 package cosma.iban;
 
-import cosma.iban.generator.IBAN;
+import cosma.iban.generator.IBANGenerator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.cache.Cache;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +22,7 @@ public class MainApplication implements CommandLineRunner {
 
             Map<String, Boolean> storage = new ConcurrentHashMap<>();
 
-            IBAN IBANGenerator = new IBAN(storage);
+            IBANGenerator generator = new IBANGenerator(storage);
 
             int count = 5;
             if (args.length > 1){
@@ -31,7 +30,7 @@ public class MainApplication implements CommandLineRunner {
             }
 
             for (int i = 0; i < count; i++) {
-                String IBANcode =  IBANGenerator.generate(args[0]);
+                String IBANcode =  generator.generate(args[0]);
                 System.out.println(IBANcode);
             }
         } else {
