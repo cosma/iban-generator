@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class IBAN {
 
-    private Map<String, Integer> storage;
+    private Map<String, Boolean> storage;
 
     private BasicBankAccountNumber BBAN = null;
 
     /**
-     * @param storage Map<String, Integer>
+     * @param storage Map<String, Boolean>
      */
-    public IBAN(Map<String, Integer> storage) {
+    public IBAN(Map<String, Boolean> storage) {
         this.storage = storage;
     }
 
@@ -76,7 +76,7 @@ public class IBAN {
      * @param code String
      */
     private void addToStorage(String code) {
-        this.storage.put(code, 1);
+        this.storage.put(code, true);
     }
 
 

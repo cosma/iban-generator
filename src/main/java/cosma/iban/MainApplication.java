@@ -19,13 +19,10 @@ public class MainApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-
-        Map<String, Integer> storage = new ConcurrentHashMap<>();
-
-
-
         if (args.length > 0) {
+
+            Map<String, Boolean> storage = new ConcurrentHashMap<>();
+
             IBAN IBANGenerator = new IBAN(storage);
 
             int count = 5;
@@ -34,11 +31,12 @@ public class MainApplication implements CommandLineRunner {
             }
 
             for (int i = 0; i < count; i++) {
-                String code =  IBANGenerator.generate(args[0]);
-                System.out.println(code);
+                String IBANcode =  IBANGenerator.generate(args[0]);
+                System.out.println(IBANcode);
             }
         } else {
             System.out.println("Please set as argument the ISO country code ");
+            System.exit(1);
         }
         System.exit(0);
     }
