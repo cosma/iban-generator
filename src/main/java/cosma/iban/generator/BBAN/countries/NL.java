@@ -7,13 +7,6 @@ import java.util.Random;
 public class NL extends BasicBankAccountNumber {
 
     /**
-     * @return int
-     */
-    public int getLength() {
-        return 14;
-    }
-
-    /**
      * See https://www.betaalvereniging.nl/aandachtsgebieden/giraal-betalingsverkeer/bic-sepa-transacties/
      * @return String
      */

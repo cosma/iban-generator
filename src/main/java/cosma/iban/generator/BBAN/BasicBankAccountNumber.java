@@ -10,8 +10,6 @@ abstract public class BasicBankAccountNumber {
 
     private String code;
 
-    public abstract int getLength();
-
     protected abstract String generateBankIdentifier();
 
     protected abstract String generateBranchIdentifier();
