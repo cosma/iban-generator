@@ -34,7 +34,7 @@ public class IBANValidatorTests {
 
         IBANValidator validator = new IBANValidator();
 
-        assertFalse(validator.validate("DE44430721102834595007"));
+        assertFalse(validator.validate("DE4443072"));
         assertFalse(validator.validate("DE78123456781234567894"));
         assertFalse(validator.validate("DE19149268739119308346"));
 
@@ -44,7 +44,7 @@ public class IBANValidatorTests {
         assertFalse(validator.validate("AT990188466359477935"));
 
 
-        assertFalse(validator.validate("NL47HHB8274264674"));
+        assertFalse(validator.validate("NL47HHB827426467434234343242343424342"));
         assertFalse(validator.validate("NL63BICK2835254282"));
         assertFalse(validator.validate("NL14BICK17528650415"));
     }

@@ -5,6 +5,13 @@ import cosma.iban.generator.BBAN.BasicBankAccountNumber;
 public class DE extends BasicBankAccountNumber {
 
     /**
+     * @return int
+     */
+    public int getLength() {
+        return 18;
+    }
+
+    /**
      * @return String
      */
     protected String generateBankIdentifier() {

@@ -7,12 +7,20 @@ import java.util.Random;
 public class NL extends BasicBankAccountNumber {
 
     /**
+     * @return int
+     */
+    public int getLength() {
+        return 14;
+    }
+
+    /**
      * See https://www.betaalvereniging.nl/aandachtsgebieden/giraal-betalingsverkeer/bic-sepa-transacties/
+     *
      * @return String
      */
     protected String generateBankIdentifier() {
         String[] banks = {
-                "ABNA","FTSB", "ADYB", "AEGO", "ANAA", "ANDL", "ARBN", "ARSN", "ASNB", "ATBA", "BCDM", "BCIT", "BICK",
+                "ABNA", "FTSB", "ADYB", "AEGO", "ANAA", "ANDL", "ARBN", "ARSN", "ASNB", "ATBA", "BCDM", "BCIT", "BICK",
                 "BINK", "BKCH", "BKMG", "BLGW", "BMEU", "BNDA", "BNGH", "BNPA", "BOFA", "BOFS", "BOTK", "BUNQ", "CHAS",
                 "CITC", "CITI", "COBA", "DEUT", "DHBN", "DLBK", "DNIB", "FBHL", "FLOR", "FRGH", "FVLB", "GILL", "HAND",
                 "HHBA", "HSBC", "ICBK", "INGB", "ISBK", "KABA", "KASA", "KNAB", "KOEX", "KRED", "LOCY", "LOYD", "LPLN",
